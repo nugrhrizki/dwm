@@ -1,8 +1,8 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
-static const Gap default_gap        = {.isgap = 1, .realgap = 10, .gappx = 10};
+static const unsigned int borderpx  = 2;        /* border pixel of windows */
+static const Gap default_gap        = {.isgap = 1, .realgap = 15, .gappx = 15};
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
@@ -16,7 +16,7 @@ static const char col_cyan[]        = "#6dcbfa";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_gray1,  col_cyan  },
+	[SchemeSel]  = { col_gray4, col_gray1,  col_gray1  },
 };
 
 typedef struct {
