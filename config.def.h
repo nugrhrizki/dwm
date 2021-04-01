@@ -13,7 +13,7 @@ static const char col_gray2[]       = "#191e2a";
 static const char col_gray3[]       = "#d9d7ce";
 static const char col_gray4[]       = "#ffcc66";
 static const char col_cyan[]        = "#6dcbfa";
-static const unsigned int baralpha = 0xd0;
+static const unsigned int baralpha = 0xc5;
 static const unsigned int borderalpha = OPAQUE;
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
@@ -81,7 +81,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-i", "-p", "run:", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_gray1, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-i", "-p", "run:", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_gray2, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
 
 
