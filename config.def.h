@@ -6,13 +6,13 @@ static const Gap default_gap        = {.isgap = 1, .realgap = 5, .gappx = 5};
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
-static const char *fonts[]          = { "Iosevka Nerd Font:size=10" };
-static const char dmenufont[]       = "Iosevka Nerd Font:size=10";
-static const char col_gray1[]       = "#212733";
-static const char col_gray2[]       = "#191e2a";
-static const char col_gray3[]       = "#d9d7ce";
-static const char col_gray4[]       = "#ffcc66";
-static const char col_cyan[]        = "#6dcbfa";
+static const char *fonts[]          = { "JetBrainsMono Nerd Font:size=10" };
+static const char dmenufont[]       = "JetBrainsMono Nerd Font:size=10";
+static const char col_gray1[]       = "#222222";
+static const char col_gray2[]       = "#444444";
+static const char col_gray3[]       = "#bbbbbb";
+static const char col_gray4[]       = "#eeeeee";
+static const char col_cyan[]        = "#005577";
 static const unsigned int baralpha = 0xc5;
 static const unsigned int borderalpha = OPAQUE;
 static const char *colors[][3]      = {
