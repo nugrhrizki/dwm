@@ -9,7 +9,9 @@ static const int systraypinningfailfirst = 1;
 static const int showsystray   = 1;
 static const int showbar       = 1;
 static const int topbar        = 1;
-static const char *fonts[]     = { "JetBrainsMono Nerd Font:pixelsize=12" };
+static const char *fonts[]     = {
+            "JetBrainsMono Nerd Font:pixelsize=12:antialias=true:autohint=true",
+            "JoyPixels:pixelsize=10:antialias=true:autohint=true" };
 static const char dmenufont[]  = "JetBrainsMono Nerd Font:pixelsize=12";
 static const char col_gray1[]  = "#282828";
 static const char col_gray2[]  = "#3c3836";
@@ -71,12 +73,17 @@ static const char *dmenucmd[] = { "dmenu_run", "-c", "-l", "5" ,"-i",
                                   "-p", " ", "-m", dmenumon, "-fn", dmenufont,
                                   "-nb", col_gray1, "-nf", col_gray3,
                                   "-sb", col_gray2, "-sf", col_gray4, NULL };
+static const char *clipmenucmd[] = { "clipmenu", "-c", "-l", "5" ,"-i",
+                                  "-p", " ", "-m", dmenumon, "-fn", dmenufont,
+                                  "-nb", col_gray1, "-nf", col_gray3,
+                                  "-sb", col_gray2, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
 
 
 static Key keys[] = {
   /* modifier              key        function        argument */
   { MODKEY,                XK_p,      spawn,          {.v = dmenucmd } },
+  { MODKEY|ShiftMask,      XK_p,      spawn,          {.v = clipmenucmd } },
   { MODKEY,                XK_Return, spawn,          {.v = termcmd } },
   { MODKEY,                XK_b,      togglebar,      {0} },
   { MODKEY,                XK_j,      focusstack,     {.i = +1 } },
