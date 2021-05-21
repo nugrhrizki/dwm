@@ -77,6 +77,10 @@ static const char *clipmenucmd[] = { "clipmenu", "-c", "-l", "5" ,"-i",
                                   "-p", " ", "-m", dmenumon, "-fn", dmenufont,
                                   "-nb", col_gray1, "-nf", col_gray3,
                                   "-sb", col_gray2, "-sf", col_gray4, NULL };
+static const char *searchcmd[] = { "searsh", NULL }; /* , "-c", "-l", "5" ,"-i",
+                                  "-p", " ", "-m", dmenumon, "-fn", dmenufont,
+                                  "-nb", col_gray1, "-nf", col_gray3,
+                                  "-sb", col_gray2, "-sf", col_gray4, NULL } */
 static const char *termcmd[]  = { "st", NULL };
 
 
@@ -85,6 +89,7 @@ static Key keys[] = {
   { MODKEY,                XK_p,      spawn,          {.v = dmenucmd } },
   { MODKEY|ShiftMask,      XK_p,      spawn,          {.v = clipmenucmd } },
   { MODKEY,                XK_Return, spawn,          {.v = termcmd } },
+  { MODKEY|ShiftMask,      XK_s,      spawn,          {.v = searchcmd } },
   { MODKEY,                XK_b,      togglebar,      {0} },
   { MODKEY,                XK_j,      focusstack,     {.i = +1 } },
   { MODKEY,                XK_k,      focusstack,     {.i = -1 } },
