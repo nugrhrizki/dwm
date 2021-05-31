@@ -1,6 +1,6 @@
 /* appearance */
 static const unsigned int borderpx = 2;
-static const Gap default_gap       = {.isgap = 1, .realgap = 5, .gappx = 5};
+static const Gap default_gap       = {.isgap = 1, .realgap = 10, .gappx = 10};
 static const unsigned int snap     = 32;
 static const unsigned int systraypinning = 0;
 static const unsigned int systrayonleft  = 1;
@@ -28,11 +28,13 @@ typedef struct { const char *name; const void *cmd; } Sp;
 
 const char *spcmd1[] = {"st", "-n", "spterm", "-g", "120x34", NULL };
 const char *spcmd2[] = {"st", "-n", "spfm", "-g", "120x34", "-e", "lf", NULL };
+const char *spcmd3[] = {"st", "-n", "spnotes", "-g", "120x34", "-e", "notetaking", NULL };
 
 static Sp scratchpads[] = {
 	/* name          cmd  */
 	{"spterm",      spcmd1},
 	{"spfm",        spcmd2},
+	{"spnotes",     spcmd3},
 };
 
 /* tagging */
@@ -43,6 +45,7 @@ static const Rule rules[] = {
 	{ "Firefox",  NULL,       NULL,   1 << 8,    0,           1,               -1 },
 	{ NULL,       "spterm",   NULL,   SPTAG(0),  1,           0,               -1 },
 	{ NULL,       "spfm",     NULL,   SPTAG(1),  1,           0,               -1 },
+	{ NULL,       "spnotes",  NULL,   SPTAG(2),  1,           0,               -1 },
 };
 
 /* layout(s) */
@@ -110,8 +113,9 @@ static Key keys[] = {
 	{ MODKEY,                XK_period, focusmon,       {.i = +1 } },
 	{ MODKEY|ShiftMask,      XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,      XK_period, tagmon,         {.i = +1 } },
-	{ MODKEY,                XK_y,      togglescratch,  {.ui = 0 } },
+	{ MODKEY,                XK_s,      togglescratch,  {.ui = 0 } },
 	{ MODKEY,                XK_u,      togglescratch,  {.ui = 1 } },
+	{ MODKEY,                XK_n,      togglescratch,  {.ui = 2 } },
 	{ MODKEY,                XK_minus,  setgaps,        {.i = -5 } },
 	{ MODKEY,                XK_equal,  setgaps,        {.i = +5 } },
 	{ MODKEY|ShiftMask,      XK_minus,  setgaps,        {.i = GAP_RESET } },
