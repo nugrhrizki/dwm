@@ -82,6 +82,7 @@ static const char *clipmenucmd[] = { "clipmenu", "-c", "-l", "5" ,"-i",
 				"-nb", col_gray1, "-nf", col_gray3,
 				"-sb", col_gray2, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
+static const char *flashfocus[]  = { "flashfocus", NULL };
 
 
 #include "movestack.c"
@@ -116,6 +117,7 @@ static Key keys[] = {
 	{ MODKEY,                XK_s,      togglescratch,  {.ui = 0 } },
 	{ MODKEY,                XK_u,      togglescratch,  {.ui = 1 } },
 	{ MODKEY,                XK_n,      togglescratch,  {.ui = 2 } },
+	{ MODKEY,                XK_grave,  spawn,          {.v = flashfocus } },
 	{ MODKEY,                XK_minus,  setgaps,        {.i = -5 } },
 	{ MODKEY,                XK_equal,  setgaps,        {.i = +5 } },
 	{ MODKEY|ShiftMask,      XK_minus,  setgaps,        {.i = GAP_RESET } },
