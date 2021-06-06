@@ -4,24 +4,25 @@ static const Gap default_gap       = {.isgap = 1, .realgap = 10, .gappx = 10};
 static const unsigned int snap     = 32;
 static const unsigned int systraypinning = 0;
 static const unsigned int systrayonleft  = 1;
-static const unsigned int systrayspacing = 5;
+static const unsigned int systrayspacing = 3;
 static const int systraypinningfailfirst = 1;
 static const int showsystray   = 1;
 static const int showbar       = 1;
 static const int topbar        = 1;
 static const char *fonts[]     = {
-		"JetBrainsMono Nerd Font:pixelsize=10:antialias=true:autohint=true",
-		"JoyPixels:pixelsize=8:antialias=true:autohint=true" };
+	"JetBrainsMono Nerd Font:pixelsize=10:antialias=true:autohint=true",
+	"JoyPixels:pixelsize=8:antialias=true:autohint=true"
+};
 static const char dmenufont[]  = "JetBrainsMono Nerd Font:pixelsize=12";
-static const char col_gray1[]  = "#282828";
-static const char col_gray2[]  = "#3c3836";
-static const char col_gray3[]  = "#928374";
-static const char col_gray4[]  = "#ebdbb2";
-static const char col_yellow[] = "#fabd2f";
+static const char col_gray1[]  = "#3a3a3a";
+static const char col_gray2[]  = "#e4e4e4";
+static const char col_gray3[]  = "#626262";
+static const char col_gray4[]  = "#d0d0d0";
+static const char col_accent[] = "#875f5f";
 static const char *colors[][3] = {
 	/*               fg         bg         border   */
-	[SchemeNorm] = { col_gray4, col_gray1, col_gray1 },
-	[SchemeSel]  = { col_yellow, col_gray1,  col_gray3  },
+	[SchemeNorm] = { col_gray4, col_gray1, col_gray3 },
+	[SchemeSel]  = { col_gray2, col_accent,  col_gray1  },
 };
 
 typedef struct { const char *name; const void *cmd; } Sp;
@@ -40,12 +41,12 @@ static Sp scratchpads[] = {
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
 static const Rule rules[] = {
-	/* class      instance    title   tags mask  isfloating   isfakefullscreen monitor */
-	{ "Gimp",     NULL,       NULL,   0,         1,           0,               -1 },
-	{ "Firefox",  NULL,       NULL,   1 << 8,    0,           1,               -1 },
-	{ NULL,       "spterm",   NULL,   SPTAG(0),  1,           0,               -1 },
-	{ NULL,       "spfm",     NULL,   SPTAG(1),  1,           0,               -1 },
-	{ NULL,       "spnotes",  NULL,   SPTAG(2),  1,           0,               -1 },
+	/* class      instance    title   tags mask  isfloating   monitor */
+	{ "Gimp",     NULL,       NULL,   0,         1,           -1 },
+	{ "Firefox",  NULL,       NULL,   1 << 8,    0,           -1 },
+	{ NULL,       "spterm",   NULL,   SPTAG(0),  1,           -1 },
+	{ NULL,       "spfm",     NULL,   SPTAG(1),  1,           -1 },
+	{ NULL,       "spnotes",  NULL,   SPTAG(2),  1,           -1 },
 };
 
 /* layout(s) */
@@ -73,19 +74,12 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0";
-static const char *dmenucmd[] = { "dmenu_run", "-c", "-l", "5" ,"-i",
-				"-p", " ", "-m", dmenumon, "-fn", dmenufont,
-				"-nb", col_gray1, "-nf", col_gray3,
-				"-sb", col_gray2, "-sf", col_gray4, NULL };
-static const char *clipmenucmd[] = { "clipmenu", "-c", "-l", "5" ,"-i",
-				"-p", " ", "-m", dmenumon, "-fn", dmenufont,
-				"-nb", col_gray1, "-nf", col_gray3,
-				"-sb", col_gray2, "-sf", col_gray4, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-c", "-l", "5" ,"-i", "-p", " ", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_accent, "-sf", col_gray4, NULL };
+static const char *clipmenucmd[] = { "clipmenu", "-c", "-l", "5" ,"-i", "-p", " ", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_accent, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
 static const char *flashfocus[]  = { "flashfocus", NULL };
 
 
-#include "movestack.c"
 static Key keys[] = {
 	/* modifier              key        function        argument */
 	{ MODKEY,                XK_p,      spawn,          {.v = dmenucmd } },
@@ -94,8 +88,6 @@ static Key keys[] = {
 	{ MODKEY,                XK_b,      togglebar,      {0} },
 	{ MODKEY,                XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                XK_k,      focusstack,     {.i = -1 } },
-	{ MODKEY|ShiftMask,      XK_j,      movestack,      {.i = +1 } },
-	{ MODKEY|ShiftMask,      XK_k,      movestack,      {.i = -1 } },
 	{ MODKEY,                XK_i,      incnmaster,     {.i = +1 } },
 	{ MODKEY,                XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                XK_h,      setmfact,       {.f = -0.05} },
