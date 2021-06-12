@@ -1,7 +1,7 @@
 Patched version of dwm by me
 ============================
 
-Requirements
+📝 Requirements
 ------------
 * Xlib header files.
 * libxft-bgra [[AUR]](https://aur.archlinux.org/packages/libxft-bgra-git/) | [[patched]](https://github.com/uditkarode/libxft-bgra) | [[source]](https://gitlab.freedesktop.org/xorg/lib/libxft.git)
@@ -11,7 +11,7 @@ Requirements
 > **NOTE:** in config.h there is dmenu_cmd which I have modified,<br>
 > so I recommend using my build [dmenu](https://github.com/nugrhrizki/dmenu), or you can do whatever you want
 
-Patches
+🩹 Patches
 -------
 * fake fullscreen: prevents dwm from crashing when fullscreen
 * full gaps: add gaps around the window (toggleable)
@@ -21,8 +21,8 @@ Patches
 * systray: support system tray, system tray will appear in the bar
 * support emoji: i mean colored emoji. that's why you need to install libxft-bgra
 
-Installation
-------------
+📥 Installation
+---------------
 ```sh
 # Clone the repository to your machine
 git clone https://github.com/nugrhrizki/dwm.git
@@ -40,7 +40,7 @@ sudo make install
 ```
 
 
-Starting dwm
+🚀 Starting dwm
 -----------
 Select _Dwm_ from the menu in a **display manager** of choice.
 Alternatively, you can start dwm with **startx** append `exec dwm` to `~/.xinitrc` for example:
@@ -52,7 +52,7 @@ exec dwm
 > see [here](https://github.com/nugrhrizki/dotfiles/blob/main/config/X11/xinitrc) for reference
 
 
-Statusbar
+🪶 Statusbar
 ---------
 In order to display status info in the bar, you can do something
 like this in your `~/.xinitrc`:
@@ -67,12 +67,12 @@ exec dwm
 
 > **Note**: I would recommend to using [dwmblocks](https://github.com/LukeSmithxyz/dwmblocks) for statusbar
 
-Configuration
+⚙️ Configuration
 -------------
 The configuration of dwm is done by modifying config.h
 and (re)compiling the source code.
 
-Issue
+💢 Issue
 -----
 Java applications which use the **XToolkit/XAWT** backend may draw grey windows
 only. The **XToolkit/XAWT** backend breaks ICCCM-compliance in recent JDK 1.5 and early
@@ -87,7 +87,7 @@ or running
 
     xprop -root -f _NET_WM_NAME 32a -set _NET_WM_NAME LG3D
 
-or (to pretend that a non-reparenting window manager is running that the XToolkit/XAWT backend can recognize)
+or (to pretend that a non-reparenting window manager is running that the **XToolkit/XAWT** backend can recognize)
 
     wmname LG3D
 
