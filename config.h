@@ -3,39 +3,38 @@ static const unsigned int borderpx = 2;
 static const Gap default_gap       = {.isgap = 1, .realgap = 10, .gappx = 10};
 static const unsigned int snap     = 32;
 static const unsigned int systraypinning = 0;
-static const unsigned int systrayonleft  = 1;
+static const unsigned int systrayonleft  = 1; /* 0 means system tray appear on the left of statusbar */
 static const unsigned int systrayspacing = 3;
 static const int systraypinningfailfirst = 1;
-static const int showsystray   = 1;
-static const int showbar       = 1;
-static const int topbar        = 1;
-static const char *fonts[]     = {
-	"JetBrainsMono Nerd Font:pixelsize=10:antialias=true:autohint=true",
+static const int showsystray    = 1; /* 0 means no system tray */
+static const int showbar        = 1; /* 0 means hidebar */
+static const int topbar         = 1; /* 0 means bottombar */
+static const char *fonts[]      = {
+	"monospace:pixelsize=10:antialias=true:autohint=true",
 	"JoyPixels:pixelsize=8:antialias=true:autohint=true"
 };
-static const char dmenufont[]  = "JetBrainsMono Nerd Font:pixelsize=12";
-static const char col_gray1[]  = "#3a3a3a";
-static const char col_gray2[]  = "#e4e4e4";
-static const char col_gray3[]  = "#626262";
-static const char col_gray4[]  = "#d0d0d0";
-static const char col_accent[] = "#875f5f";
-static const char *colors[][3] = {
+static const char dmenufont[]   = "monospace:pixelsize=12:antialias=true:autohint=true";
+static const char col_gray1[]   = "#3a3a3a";
+static const char col_gray2[]   = "#e4e4e4";
+static const char col_gray3[]   = "#626262";
+static const char col_gray4[]   = "#d0d0d0";
+static const char col_special[] = "#875f5f";
+static const char *colors[][3]  = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray4, col_gray1, col_gray3 },
-	[SchemeSel]  = { col_gray2, col_accent,  col_gray1  },
+	[SchemeSel]  = { col_gray2, col_special,  col_gray1  },
 };
+
+/* change this if you don't use st (simple terminal) */
+static const char default_terminal[] = "st";
 
 typedef struct { const char *name; const void *cmd; } Sp;
 
-const char *spcmd1[] = {"st", "-n", "spterm", "-g", "120x34", NULL };
-const char *spcmd2[] = {"st", "-n", "spfm", "-g", "120x34", "-e", "lf", NULL };
-const char *spcmd3[] = {"st", "-n", "spnotes", "-g", "120x34", "-e", "notetaking", NULL };
+const char *spcmd1[] = { default_terminal, "-n", "spterm", "-g", "120x34", NULL };
 
 static Sp scratchpads[] = {
 	/* name          cmd  */
 	{"spterm",      spcmd1},
-	{"spfm",        spcmd2},
-	{"spnotes",     spcmd3},
 };
 
 /* tagging */
@@ -45,8 +44,6 @@ static const Rule rules[] = {
 	{ "Gimp",     NULL,       NULL,   0,         1,           -1 },
 	{ "Firefox",  NULL,       NULL,   1 << 8,    0,           -1 },
 	{ NULL,       "spterm",   NULL,   SPTAG(0),  1,           -1 },
-	{ NULL,       "spfm",     NULL,   SPTAG(1),  1,           -1 },
-	{ NULL,       "spnotes",  NULL,   SPTAG(2),  1,           -1 },
 };
 
 /* layout(s) */
@@ -74,16 +71,13 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0";
-static const char *dmenucmd[] = { "dmenu_run", "-c", "-l", "5" ,"-i", "-p", " ", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_accent, "-sf", col_gray4, NULL };
-static const char *clipmenucmd[] = { "clipmenu", "-c", "-l", "5" ,"-i", "-p", " ", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_accent, "-sf", col_gray4, NULL };
-static const char *termcmd[]  = { "st", NULL };
-static const char *flashfocus[]  = { "flashfocus", NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-c", "-l", "5" ,"-i", "-p", " ", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_special, "-sf", col_gray4, NULL };
+static const char *termcmd[]  = { default_terminal, NULL };
 
 
 static Key keys[] = {
 	/* modifier              key        function        argument */
 	{ MODKEY,                XK_p,      spawn,          {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,      XK_p,      spawn,          {.v = clipmenucmd } },
 	{ MODKEY,                XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                XK_b,      togglebar,      {0} },
 	{ MODKEY,                XK_j,      focusstack,     {.i = +1 } },
@@ -107,9 +101,6 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,      XK_comma,  tagmon,         {.i = -1 } },
 	{ MODKEY|ShiftMask,      XK_period, tagmon,         {.i = +1 } },
 	{ MODKEY,                XK_s,      togglescratch,  {.ui = 0 } },
-	{ MODKEY,                XK_u,      togglescratch,  {.ui = 1 } },
-	{ MODKEY,                XK_n,      togglescratch,  {.ui = 2 } },
-	{ MODKEY,                XK_grave,  spawn,          {.v = flashfocus } },
 	{ MODKEY,                XK_minus,  setgaps,        {.i = -5 } },
 	{ MODKEY,                XK_equal,  setgaps,        {.i = +5 } },
 	{ MODKEY|ShiftMask,      XK_minus,  setgaps,        {.i = GAP_RESET } },
